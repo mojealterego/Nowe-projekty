@@ -9,7 +9,10 @@ const defaultPolicies: Policy[] = [
   { id: "email", action: "send_email", maxRisk: "medium", maxCostEur: 1, requireReviewAboveRisk: "medium", enabled: true },
   { id: "payment", action: "create_payment", maxRisk: "low", maxCostEur: 10, requireReviewAboveRisk: "low", enabled: true },
   { id: "read", action: "read_data", maxRisk: "high", maxCostEur: 1, enabled: true },
-  { id: "generic-read", action: "read_*", maxRisk: "medium", maxCostEur: 2, enabled: true }
+  { id: "generic-read", action: "read_*", maxRisk: "medium", maxCostEur: 2, enabled: true },
+  // Cashflow Collections: deterministic analysis and drafting are side-effect free.
+  { id: "collections-prioritize", action: "collections.prioritize_invoice", maxRisk: "low", maxCostEur: 0.25, enabled: true },
+  { id: "collections-draft", action: "collections.draft_message", maxRisk: "low", maxCostEur: 0.25, enabled: true }
 ];
 
 const destructiveActionPattern = /^(delete|destroy|remove|revoke|rotate|reset|disable|transfer|withdraw|create_payment|change_credentials|grant_access|send_.*|publish|execute_.*)/i;
