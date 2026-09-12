@@ -1,6 +1,6 @@
 {
   "name": "agent-ops-control-tower",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "type": "module",
   "scripts": {
@@ -9,6 +9,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@hono/node-server": "^1.19.2",
     "hono": "^4.9.7"
   },
   "devDependencies": {
