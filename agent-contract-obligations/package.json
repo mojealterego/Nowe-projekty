@@ -1,0 +1,8 @@
+{
+  "name": "agent-contract-obligations",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": { "test": "vitest run", "typecheck": "tsc --noEmit" },
+  "devDependencies": { "@types/node": "^24.5.2", "typescript": "^5.9.2", "vitest": "^3.2.4" }
+}
