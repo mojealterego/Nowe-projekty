@@ -1,16 +1,21 @@
 export class IdempotencyStore {
   private readonly results = new Map<string, unknown>();
 
-  has(key: string): boolean {
-    return this.results.has(key);
+  private key(tenantId: string, idempotencyKey: string): string {
+    return `${tenantId}:${idempotencyKey}`;
   }
 
-  get<T>(key: string): T | undefined {
-    return this.results.get(key) as T | undefined;
+  has(tenantId: string, idempotencyKey: string): boolean {
+    return this.results.has(this.key(tenantId, idempotencyKey));
   }
 
-  set<T>(key: string, value: T): void {
-    if (this.results.has(key)) throw new Error(`IDEMPOTENCY_CONFLICT:${key}`);
+  get<T>(tenantId: string, idempotencyKey: string): T | undefined {
+    return this.results.get(this.key(tenantId, idempotencyKey)) as T | undefined;
+  }
+
+  set<T>(tenantId: string, idempotencyKey: string, value: T): void {
+    const key = this.key(tenantId, idempotencyKey);
+    if (this.results.has(key)) throw new Error(`IDEMPOTENCY_CONFLICT:${tenantId}:${idempotencyKey}`);
     this.results.set(key, value);
   }
 }
