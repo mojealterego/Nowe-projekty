@@ -37,12 +37,11 @@ describe("Cashflow Collections runtime", () => {
       estimatedCostEur: 0.1,
       idempotencyKey: "priority:INV-100"
     });
-
     expect(result.ok).toBe(true);
     expect(result.output).toMatchObject({ invoiceId: "INV-100", priority: "critical" });
   });
 
-  it("does not send anything when the customer opted out", async () => {
+  it("blocks automated communication for opted-out customers", async () => {
     const runtime = createCollectionsRuntime();
     const context = runtime.createContext(contextInput);
     const result = await runtime.execute(context, {
@@ -50,21 +49,74 @@ describe("Cashflow Collections runtime", () => {
       input: {
         invoice,
         customerName: "Acme",
-        decision: {
-          invoiceId: invoice.id,
-          priority: "high",
-          score: 80,
-          nextAction: "human_review",
-          rationale: ["customer opted out"]
-        }
+        decision: { invoiceId: invoice.id, priority: "high", score: 80, nextAction: "human_review", rationale: ["customer opted out"] }
       },
       risk: "low",
       resource: `customer:${invoice.customerId}`,
       estimatedCostEur: 0.1,
       idempotencyKey: "draft:INV-100"
     });
-
     expect(result.ok).toBe(true);
     expect(result.output).toMatchObject({ sendable: false });
+  });
+
+  it("requires human approval before collection message delivery", async () => {
+    const runtime = createCollectionsRuntime();
+    const context = runtime.createContext(contextInput);
+    const call = {
+      name: "collections.send_message",
+      input: {
+        invoice,
+        recipient: "finance@example.com",
+        communicationOptOut: false,
+        message: { subject: "Payment reminder", body: "Please arrange payment." }
+      },
+      risk: "low" as const,
+      resource: `customer:${invoice.customerId}`,
+      estimatedCostEur: 0.1,
+      idempotencyKey: "send:INV-100"
+    };
+
+    const pending = await runtime.execute(context, call);
+    expect(pending.ok).toBe(false);
+    expect(pending.error?.code).toBe("APPROVAL_REQUIRED");
+    expect(pending.error?.approvalRequestId).toBeDefined();
+
+    const requestId = pending.error!.approvalRequestId!;
+    const token = runtime.approvalStore().approve(context.tenantId, requestId);
+    expect(token).toBeDefined();
+
+    const approved = await runtime.execute(context, call, { requestId, token: token! });
+    expect(approved.ok).toBe(true);
+    expect(approved.output).toMatchObject({ status: "approved_for_delivery", invoiceId: invoice.id });
+
+    const replay = await runtime.execute(context, call, { requestId, token: token! });
+    expect(replay.ok).toBe(true);
+    expect(replay.output).toEqual(approved.output);
+  });
+
+  it("rejects an opted-out customer at the delivery boundary", async () => {
+    const runtime = createCollectionsRuntime();
+    const context = runtime.createContext(contextInput);
+    const call = {
+      name: "collections.send_message",
+      input: {
+        invoice,
+        recipient: "finance@example.com",
+        communicationOptOut: true,
+        message: { subject: "Payment reminder", body: "Please arrange payment." }
+      },
+      risk: "low" as const,
+      resource: `customer:${invoice.customerId}`,
+      estimatedCostEur: 0.1,
+      idempotencyKey: "send:INV-OPT-OUT"
+    };
+
+    const pending = await runtime.execute(context, call);
+    expect(pending.error?.code).toBe("APPROVAL_REQUIRED");
+    const token = runtime.approvalStore().approve(context.tenantId, pending.error!.approvalRequestId!);
+    const result = await runtime.execute(context, call, { requestId: pending.error!.approvalRequestId!, token: token! });
+    expect(result.ok).toBe(false);
+    expect(result.error?.code).toBe("COMMUNICATION_OPT_OUT");
   });
 });
