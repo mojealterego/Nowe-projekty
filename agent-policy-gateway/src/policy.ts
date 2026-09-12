@@ -17,7 +17,12 @@ const defaultPolicies: Policy[] = [
   { id: "customer-prepare-response", action: "customer.prepare_response", maxRisk: "low", maxCostEur: 0.25, enabled: true },
   { id: "customer-update-case", action: "customer.update_case", maxRisk: "low", maxCostEur: 0.25, enabled: true },
   { id: "customer-send-response", action: "customer.send_response", maxRisk: "medium", maxCostEur: 1, requireReviewAboveRisk: "low", enabled: true },
-  { id: "customer-verify-outcome", action: "customer.verify_outcome", maxRisk: "low", maxCostEur: 0.25, enabled: true }
+  { id: "customer-verify-outcome", action: "customer.verify_outcome", maxRisk: "low", maxCostEur: 0.25, enabled: true },
+  { id: "procurement-normalize", action: "procurement.normalize_offer", maxRisk: "low", maxCostEur: 0.25, enabled: true },
+  { id: "procurement-recommend", action: "procurement.recommend_supplier", maxRisk: "low", maxCostEur: 0.25, enabled: true },
+  { id: "procurement-rfq", action: "procurement.prepare_rfq", maxRisk: "medium", maxCostEur: 1, requireReviewAboveRisk: "medium", enabled: true },
+  { id: "procurement-commit", action: "procurement.commit_purchase", maxRisk: "high", maxCostEur: 10, requireReviewAboveRisk: "low", enabled: true },
+  { id: "procurement-verify", action: "procurement.verify_outcome", maxRisk: "low", maxCostEur: 0.25, enabled: true }
 ];
 
 const destructiveActionPattern = /^(delete|destroy|remove|revoke|rotate|reset|disable|transfer|withdraw|create_payment|change_credentials|grant_access|send_.*|publish|execute_.*)/i;
