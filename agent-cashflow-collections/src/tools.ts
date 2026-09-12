@@ -1,5 +1,5 @@
-import type { AgentContext, ToolResult } from "../agents/b2b/runtime/types.js";
-import type { ToolDefinition } from "../agents/b2b/runtime/registry.js";
+import type { AgentContext, ToolResult } from "../../agents/b2b/runtime/types.js";
+import type { ToolDefinition } from "../../agents/b2b/runtime/registry.js";
 import { prioritizeInvoice, type CustomerHistory, type Invoice } from "./domain.js";
 
 export interface PrioritizeInput {
