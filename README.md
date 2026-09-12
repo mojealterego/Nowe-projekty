@@ -2,24 +2,28 @@
 
 Repozytorium projektów generowanych na podstawie analizy popytu, trendów technologicznych i modeli monetyzacji.
 
-## Portfolio 10 agentów
+# MASTER PORTFOLIO 2026
 
-| # | Projekt | Typ | Główna wartość |
-|---|---|---|---|
-| 1 | `agent-policy-gateway` | AI infrastructure | Kontrola działań agentów |
-| 2 | `agent-ops-control-tower` | AI infrastructure | Observability, approvals, koszt |
-| 3 | `agent-compliance-evidence` | B2B compliance | Automatyczne pozyskiwanie dowodów |
-| 4 | `agent-procurement-scout` | B2B procurement | Dostawcy, TCO i sourcing |
-| 5 | `agent-cashflow-collections` | FinOps/finance | Należności i cash flow |
-| 6 | `agent-contract-obligations` | Legal/operations | Wykonanie zobowiązań z umów |
-| 7 | `agent-data-quality` | Data operations | Jakość i bezpieczna korekta danych |
-| 8 | `agent-inventory-replenishment` | Retail/manufacturing | Replenishment i ryzyko dostaw |
-| 9 | `agent-ai-finops` | AI infrastructure/finance | Koszt agentów i modeli |
-| 10 | `agent-customer-operations` | SMB operations | Rozwiązywanie spraw przez działanie |
+Pełny ranking pięciu segmentów rynku znajduje się w [`MARKET-PORTFOLIO-2026.md`](./MARKET-PORTFOLIO-2026.md).
 
-Pełna strategia: [`AGENT-PORTFOLIO.md`](./AGENT-PORTFOLIO.md).
+## 1. B2B AI Agents
 
-## Ranking 10 aplikacji desktopowych — 2026
+| # | Projekt | Typ | Score |
+|---:|---|---|---:|
+| **1** | **agent-cashflow-collections** | Finance / revenue recovery | **9.8** |
+| **2** | **agent-customer-operations** | Customer operations | **9.7** |
+| **3** | **agent-procurement-scout** | Procurement | **9.6** |
+| **4** | **agent-compliance-evidence** | Compliance | **9.5** |
+| **5** | **agent-contract-obligations** | Legal / operations | **9.4** |
+| **6** | **agent-ai-finops** | AI cost control | **9.3** |
+| **7** | **agent-inventory-replenishment** | Supply / retail | **9.2** |
+| **8** | **agent-data-quality** | Data operations | **9.1** |
+| **9** | **agent-ops-control-tower** | Agent operations | **9.0** |
+| **10** | **agent-policy-gateway** | Agent infrastructure | **8.9** |
+
+Legacy/full portfolio: [`AGENT-PORTFOLIO.md`](./AGENT-PORTFOLIO.md).
+
+## 2. Desktop Applications
 
 | Rank | Produkt | Score |
 |---:|---|---:|
@@ -34,11 +38,43 @@ Pełna strategia: [`AGENT-PORTFOLIO.md`](./AGENT-PORTFOLIO.md).
 | **9** | **Smart Desktop Backup & Recovery** | **7.95/10** |
 | **10** | **Creator Production OS** | **7.80/10** |
 
-Pełna analiza: [`DESKTOP-APP-RANKING.md`](./DESKTOP-APP-RANKING.md).
+Full analysis: [`DESKTOP-APP-RANKING.md`](./DESKTOP-APP-RANKING.md).
 
-## Android Games — portfolio badawcze
+## 3. Android / Mobile Applications
 
-Pierwszym projektem skierowanym do faktycznej produkcji jest **Arrow Heist** — Android-first hybrid-casual puzzle/heist game.
+| Rank | Projekt | Score |
+|---:|---|---:|
+| **1** | **MONEYOS** — AI Personal CFO | **9.8/10** |
+| **2** | **LIFECORE** — Personal AI OS | **9.7/10** |
+| **3** | **REVENUEOS** — AI Revenue Agent | **9.6/10** |
+| **4** | **SHIELD** — AI Scam Protection | **9.5/10** |
+| **5** | **HOMEOS** — Household AI | **9.4/10** |
+| **6** | **HEALTHOS** — Personal Health AI | **9.3/10** |
+| **7** | **BUYWISE** — AI Shopping Research | **9.2/10** |
+| **8** | **CAREOS** — Family Care Agent | **9.1/10** |
+| **9** | **CAREEROS** — AI Income Agent | **9.0/10** |
+| **10** | **EVIDENCE** — Document & Research Agent | **8.9/10** |
+
+Full analysis: [`ANDROID-APP-RANKING.md`](./ANDROID-APP-RANKING.md).
+
+## 4. Mobile AI Agents
+
+| Rank | Agent | Score |
+|---:|---|---:|
+| **1** | **MONEY AGENT** | **9.9/10** |
+| **2** | **INBOX AGENT** | **9.8/10** |
+| **3** | **LIFE ADMIN AGENT** | **9.7/10** |
+| **4** | **SHOPPING AGENT** | **9.6/10** |
+| **5** | **SCAM SHIELD AGENT** | **9.5/10** |
+| **6** | **FAMILY CARE AGENT** | **9.4/10** |
+| **7** | **CAREER AGENT** | **9.3/10** |
+| **8** | **TRAVEL EXECUTION AGENT** | **9.2/10** |
+| **9** | **HEALTH NAVIGATOR** | **9.1/10** |
+| **10** | **PERSONAL KNOWLEDGE AGENT** | **9.0/10** |
+
+Full analysis and autonomy model: [`MOBILE-AI-AGENT-RANKING.md`](./MOBILE-AI-AGENT-RANKING.md).
+
+## 5. Android Games
 
 | Rank | Projekt | Model | Score | Status |
 |---:|---|---|---:|---|
@@ -51,27 +87,53 @@ Pierwszym projektem skierowanym do faktycznej produkcji jest **Arrow Heist** —
 | **7** | **Who Is Lying?** | Social deduction | **8.9/10** | Research |
 | **8** | **Idle Syndicate** | Idle / business | **8.8/10** | Research |
 | **9** | **Pocket League Manager** | Sports management | **8.7/10** | Research |
-| **10** | **Worlds in Your Pocket** | Mini-game / UGC platform | **8.6/10** | Research |
+| **10** | **Worlds in Your Pocket** | Mini-game / UGC | **8.6/10** | Research |
+
+Full ranking and monetization thesis: [`ANDROID-GAME-RANKING-2026.md`](./ANDROID-GAME-RANKING-2026.md).
 
 ### Arrow Heist
 
 **Core promise:** Solve the route. Beat the security. Escape with the loot.
 
-The project combines a deterministic directional puzzle with a lightweight heist layer. MVP documentation lives in [`games/android/arrow-heist/`](./games/android/arrow-heist/).
+MVP documentation: [`games/android/arrow-heist/`](./games/android/arrow-heist/).
 
-## Metoda selekcji
+# Portfolio methodology
 
-Projekty są wybierane na podstawie:
-1. realnego problemu lub potrzeby użytkownika,
-2. rosnącego popytu,
-3. możliwości wykonania działania przez system/agent,
-4. mierzalnego rezultatu,
-5. powtarzalnego przychodu lub wysokiego LTV,
-6. możliwości zbudowania przewagi danych/workflow/game economy,
-7. kosztu wejścia możliwego do zweryfikowania przez MVP.
+Projects are selected using:
 
-## Zasada architektoniczna
+1. problem intensity / demand,
+2. willingness-to-pay,
+3. repeat usage and retention potential,
+4. market growth,
+5. agentic/AI leverage,
+6. competitive intensity,
+7. MVP cost and speed,
+8. scalability,
+9. distribution,
+10. technical and regulatory risk.
 
-Każdy agent powinien posiadać własny katalog, PRD, jawny stack, działający punkt wejścia, testy dla logiki krytycznej, audit trail oraz jasno zdefiniowaną granicę human-in-the-loop.
+For agents, preference goes to measurable outcomes over text generation. For mobile agents, preference goes to cross-app task completion with explicit permission boundaries. For games, preference goes to repeatable loops with strong retention and controllable unit economics.
 
-Dla gier obowiązuje analogiczna zasada: deterministyczny gameplay, data-driven content, telemetryka KPI, kontrolowana ekonomia, feature flags i wyraźne bramki soft-launch przed skalowaniem UA.
+# Production order
+
+## Tier A
+
+1. MONEYOS
+2. MONEY AGENT
+3. agent-cashflow-collections
+4. agent-customer-operations
+5. Private AI Workstation
+6. SHIELD
+7. Arrow Heist
+
+## Tier B
+
+8. LIFECORE
+9. REVENUEOS
+10. INBOX AGENT
+11. agent-procurement-scout
+12. AI Developer Command Center
+13. HEALTHOS
+14. Repair District
+
+Projects move from ranking → product design → economic model → technical architecture → MVP → validation → scale. Ranking alone is not considered production-ready.
