@@ -17,7 +17,7 @@ const defaultPolicies: Policy[] = [
   { id: "procurement-normalize", action: "procurement.normalize_offer", maxRisk: "low", maxCostEur: 0.25, enabled: true },
   { id: "procurement-recommend", action: "procurement.recommend_supplier", maxRisk: "low", maxCostEur: 0.25, enabled: true },
   { id: "procurement-rfq", action: "procurement.prepare_rfq", maxRisk: "medium", maxCostEur: 1, requireReviewAboveRisk: "medium", enabled: true },
-  { id: "procurement-commit", action: "procurement.commit_purchase", maxRisk: "high", maxCostEur: 10, requireReviewAboveRisk: "low", enabled: true },
+  { id: "procurement-commit", action: "procurement.commit_purchase", maxRisk: "medium", maxCostEur: 10, requireReviewAboveRisk: "low", enabled: true },
   { id: "procurement-verify", action: "procurement.verify_outcome", maxRisk: "low", maxCostEur: 0.25, enabled: true },
   { id: "compliance-assess", action: "compliance.assess_control", maxRisk: "low", maxCostEur: 0.25, enabled: true },
   { id: "compliance-request", action: "compliance.create_evidence_request", maxRisk: "low", maxCostEur: 0.25, enabled: true },
