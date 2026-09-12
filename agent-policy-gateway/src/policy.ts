@@ -22,7 +22,11 @@ const defaultPolicies: Policy[] = [
   { id: "compliance-assess", action: "compliance.assess_control", maxRisk: "low", maxCostEur: 0.25, enabled: true },
   { id: "compliance-request", action: "compliance.create_evidence_request", maxRisk: "low", maxCostEur: 0.25, enabled: true },
   { id: "compliance-remediation", action: "compliance.prepare_remediation", maxRisk: "medium", maxCostEur: 1, requireReviewAboveRisk: "medium", enabled: true },
-  { id: "compliance-verify", action: "compliance.verify_remediation", maxRisk: "low", maxCostEur: 0.25, enabled: true }
+  { id: "compliance-verify", action: "compliance.verify_remediation", maxRisk: "low", maxCostEur: 0.25, enabled: true },
+  { id: "contract-assess", action: "contract.assess_deadline", maxRisk: "low", maxCostEur: 0.25, enabled: true },
+  { id: "contract-prepare-action", action: "contract.prepare_action", maxRisk: "medium", maxCostEur: 0.5, requireReviewAboveRisk: "medium", enabled: true },
+  { id: "contract-send-notice", action: "contract.send_notice", maxRisk: "medium", maxCostEur: 1, requireReviewAboveRisk: "low", enabled: true },
+  { id: "contract-verify", action: "contract.verify_obligation", maxRisk: "low", maxCostEur: 0.25, enabled: true }
 ];
 const destructiveActionPattern = /^(delete|destroy|remove|revoke|rotate|reset|disable|transfer|withdraw|create_payment|change_credentials|grant_access|send_.*|publish|execute_.*)/i;
 function matches(policyAction: string, action: string): boolean { if (policyAction === action) return true; if (policyAction.endsWith("*")) return action.startsWith(policyAction.slice(0, -1)); return false; }
