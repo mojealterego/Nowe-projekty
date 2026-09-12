@@ -1,32 +1,36 @@
 # Nowe-projekty
 
-Repozytorium projektów wygenerowanych na podstawie analizy popytu, trendów technologicznych i modeli monetyzacji.
+Repozytorium projektów generowanych na podstawie analizy popytu, trendów technologicznych i modeli monetyzacji.
 
-## Rejestr projektów
+## Portfolio 10 agentów
 
-| Projekt | Typ | Problem | Model |
+| # | Projekt | Typ | Główna wartość |
 |---|---|---|---|
-| `agent-policy-gateway` | B2B / AI infrastructure | Kontrola działań autonomicznych agentów AI | Freemium + usage + Enterprise |
+| 1 | `agent-policy-gateway` | AI infrastructure | Kontrola działań agentów |
+| 2 | `agent-ops-control-tower` | AI infrastructure | Observability, approvals, koszt |
+| 3 | `agent-compliance-evidence` | B2B compliance | Automatyczne pozyskiwanie dowodów |
+| 4 | `agent-procurement-scout` | B2B procurement | Dostawcy, TCO i sourcing |
+| 5 | `agent-cashflow-collections` | FinOps/finance | Należności i cash flow |
+| 6 | `agent-contract-obligations` | Legal/operations | Wykonanie zobowiązań z umów |
+| 7 | `agent-data-quality` | Data operations | Jakość i bezpieczna korekta danych |
+| 8 | `agent-inventory-replenishment` | Retail/manufacturing | Replenishment i ryzyko dostaw |
+| 9 | `agent-ai-finops` | AI infrastructure/finance | Koszt agentów i modeli |
+| 10 | `agent-customer-operations` | SMB operations | Rozwiązywanie spraw przez działanie |
+
+Pełna strategia: [`AGENT-PORTFOLIO.md`](./AGENT-PORTFOLIO.md).
 
 ## Metoda selekcji
 
-Projekty są wybierane na podstawie czterech sygnałów:
+Projekty są wybierane na podstawie:
+1. realnego problemu biznesowego,
+2. rosnącego popytu,
+3. możliwości wykonania działania przez agenta,
+4. mierzalnego rezultatu,
+5. powtarzalnego przychodu,
+6. możliwości zbudowania przewagi danych/workflow.
 
-1. realny problem biznesowy,
-2. rosnący popyt,
-3. możliwość automatyzacji,
-4. możliwość uzyskania powtarzalnego przychodu.
-
-W 2026 r. szczególnie silnym sygnałem jest przechodzenie od generowania treści do agentów wykonujących działania w workflow. Jednocześnie bezpieczeństwo, prywatność i mierzalny ROI pozostają głównymi ograniczeniami adopcji SMB.
+W 2026 r. SMB-y intensywnie pilotażują agentów w customer service, administracji, analityce i automatyzacji workflow, ale bezpieczeństwo, prywatność i ROI pozostają kluczowymi barierami. Deloitte i BCG wskazują dodatkowo na znaczenie interoperacyjności, obserwowalności, danych, governance i integracji z istniejącymi systemami.
 
 ## Zasada architektoniczna
 
-Każdy projekt powinien posiadać:
-
-- własny katalog,
-- README z hipotezą rynkową,
-- PRD,
-- jawny stos technologiczny,
-- działający punkt wejścia,
-- testy dla logiki krytycznej,
-- brak sztucznych placeholderów w kodzie produkcyjnym.
+Każdy agent powinien posiadać własny katalog, PRD, jawny stack, działający punkt wejścia, testy dla logiki krytycznej, audit trail oraz jasno zdefiniowaną granicę human-in-the-loop.
