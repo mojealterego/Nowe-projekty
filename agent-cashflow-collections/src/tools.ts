@@ -21,6 +21,11 @@ export interface DraftMessageInput {
   decision: ReturnType<typeof prioritizeInvoice>;
 }
 
+export interface CollectionMessage {
+  subject: string;
+  body: string;
+}
+
 export const draftCollectionMessage: ToolDefinition<DraftMessageInput> = {
   name: "collections.draft_message",
   async execute(_context: AgentContext, input: DraftMessageInput): Promise<ToolResult> {
@@ -30,5 +35,38 @@ export const draftCollectionMessage: ToolDefinition<DraftMessageInput> = {
     const subject = `Payment reminder for invoice ${input.invoice.id}`;
     const body = `Hello ${input.customerName},\n\nThis is a reminder that invoice ${input.invoice.id} for ${input.invoice.amountCents / 100} ${input.invoice.currency} is overdue. Please let us know if payment has already been arranged or if there is an issue we should address.\n\nThank you.`;
     return { ok: true, output: { sendable: true, subject, body } };
+  }
+};
+
+export interface SendCollectionMessageInput {
+  invoice: Invoice;
+  recipient: string;
+  message: CollectionMessage;
+  communicationOptOut: boolean;
+}
+
+/**
+ * The tool is deliberately a governed action boundary. The default implementation
+ * does not contact an external provider; it returns a send plan. A real email
+ * adapter must be injected at the integration boundary after policy approval.
+ */
+export const sendCollectionMessage: ToolDefinition<SendCollectionMessageInput> = {
+  name: "collections.send_message",
+  async execute(_context: AgentContext, input: SendCollectionMessageInput): Promise<ToolResult> {
+    if (input.communicationOptOut) {
+      return { ok: false, error: { code: "COMMUNICATION_OPT_OUT", message: "Customer opted out of automated communication", retryable: false } };
+    }
+    if (!input.recipient.includes("@")) {
+      return { ok: false, error: { code: "INVALID_RECIPIENT", message: "Recipient must be a valid email address", retryable: false } };
+    }
+    return {
+      ok: true,
+      output: {
+        status: "approved_for_delivery",
+        recipient: input.recipient,
+        invoiceId: input.invoice.id,
+        message: input.message
+      }
+    };
   }
 };
