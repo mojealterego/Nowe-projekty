@@ -12,7 +12,12 @@ const defaultPolicies: Policy[] = [
   { id: "generic-read", action: "read_*", maxRisk: "medium", maxCostEur: 2, enabled: true },
   { id: "collections-prioritize", action: "collections.prioritize_invoice", maxRisk: "low", maxCostEur: 0.25, enabled: true },
   { id: "collections-draft", action: "collections.draft_message", maxRisk: "low", maxCostEur: 0.25, enabled: true },
-  { id: "collections-send", action: "collections.send_message", maxRisk: "medium", maxCostEur: 1, requireReviewAboveRisk: "low", enabled: true }
+  { id: "collections-send", action: "collections.send_message", maxRisk: "medium", maxCostEur: 1, requireReviewAboveRisk: "low", enabled: true },
+  { id: "customer-diagnose", action: "customer.diagnose_case", maxRisk: "low", maxCostEur: 0.25, enabled: true },
+  { id: "customer-prepare-response", action: "customer.prepare_response", maxRisk: "low", maxCostEur: 0.25, enabled: true },
+  { id: "customer-update-case", action: "customer.update_case", maxRisk: "low", maxCostEur: 0.25, enabled: true },
+  { id: "customer-send-response", action: "customer.send_response", maxRisk: "medium", maxCostEur: 1, requireReviewAboveRisk: "low", enabled: true },
+  { id: "customer-verify-outcome", action: "customer.verify_outcome", maxRisk: "low", maxCostEur: 0.25, enabled: true }
 ];
 
 const destructiveActionPattern = /^(delete|destroy|remove|revoke|rotate|reset|disable|transfer|withdraw|create_payment|change_credentials|grant_access|send_.*|publish|execute_.*)/i;
