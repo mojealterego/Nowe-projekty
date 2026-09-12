@@ -34,20 +34,44 @@ Pełna strategia: [`AGENT-PORTFOLIO.md`](./AGENT-PORTFOLIO.md).
 | **9** | **Smart Desktop Backup & Recovery** | **7.95/10** |
 | **10** | **Creator Production OS** | **7.80/10** |
 
-Pełna analiza, scoring, ryzyka, killer features i strategia portfolio: [`DESKTOP-APP-RANKING.md`](./DESKTOP-APP-RANKING.md).
+Pełna analiza: [`DESKTOP-APP-RANKING.md`](./DESKTOP-APP-RANKING.md).
+
+## Android Games — portfolio badawcze
+
+Pierwszym projektem skierowanym do faktycznej produkcji jest **Arrow Heist** — Android-first hybrid-casual puzzle/heist game.
+
+| Rank | Projekt | Model | Score | Status |
+|---:|---|---|---:|---|
+| **1** | **Arrow Heist** | Puzzle + heist / hybrid-casual | **9.7/10** | **IN DESIGN** |
+| **2** | **Repair District** | Merge + simulation | **9.6/10** | Research |
+| **3** | **Street Empire** | Tycoon / simulation | **9.4/10** | Research |
+| **4** | **Frontier: 30 Days** | Strategy-lite / survival | **9.3/10** | Research |
+| **5** | **Dungeon Draft** | Roguelite / deckbuilder | **9.2/10** | Research |
+| **6** | **House Flip Wars** | Restoration simulation | **9.0/10** | Research |
+| **7** | **Who Is Lying?** | Social deduction | **8.9/10** | Research |
+| **8** | **Idle Syndicate** | Idle / business | **8.8/10** | Research |
+| **9** | **Pocket League Manager** | Sports management | **8.7/10** | Research |
+| **10** | **Worlds in Your Pocket** | Mini-game / UGC platform | **8.6/10** | Research |
+
+### Arrow Heist
+
+**Core promise:** Solve the route. Beat the security. Escape with the loot.
+
+The project combines a deterministic directional puzzle with a lightweight heist layer. MVP documentation lives in [`games/android/arrow-heist/`](./games/android/arrow-heist/).
 
 ## Metoda selekcji
 
 Projekty są wybierane na podstawie:
-1. realnego problemu biznesowego,
+1. realnego problemu lub potrzeby użytkownika,
 2. rosnącego popytu,
-3. możliwości wykonania działania przez agenta,
+3. możliwości wykonania działania przez system/agent,
 4. mierzalnego rezultatu,
-5. powtarzalnego przychodu,
-6. możliwości zbudowania przewagi danych/workflow.
-
-W 2026 r. SMB-y intensywnie wdrażają automatyzację i AI, ale bezpieczeństwo, prywatność i ROI pozostają kluczowymi barierami. 69% SMB używa co najmniej jednej automatyzacji, 87% automatyzuje billing/invoicing/payment collection, a 43% deklaruje gotowość zapłacenia więcej za rozwiązanie redukujące liczbę używanych narzędzi. citeturn0search0
+5. powtarzalnego przychodu lub wysokiego LTV,
+6. możliwości zbudowania przewagi danych/workflow/game economy,
+7. kosztu wejścia możliwego do zweryfikowania przez MVP.
 
 ## Zasada architektoniczna
 
 Każdy agent powinien posiadać własny katalog, PRD, jawny stack, działający punkt wejścia, testy dla logiki krytycznej, audit trail oraz jasno zdefiniowaną granicę human-in-the-loop.
+
+Dla gier obowiązuje analogiczna zasada: deterministyczny gameplay, data-driven content, telemetryka KPI, kontrolowana ekonomia, feature flags i wyraźne bramki soft-launch przed skalowaniem UA.
