@@ -22,7 +22,7 @@ export interface ToolCall<TInput = unknown> {
 export interface ToolResult<TOutput = unknown> {
   ok: boolean;
   output?: TOutput;
-  error?: { code: string; message: string; retryable: boolean };
+  error?: { code: string; message: string; retryable: boolean; approvalRequestId?: string };
 }
 
 export interface ApprovalRequest {
