@@ -13,6 +13,17 @@ function context(runtime: ReturnType<typeof createContractObligationsRuntime>, t
 }
 
 describe("Contract Obligations runtime", () => {
+  it("extracts actionable obligations with source metadata", async () => {
+    const runtime = createContractObligationsRuntime();
+    const result = await runtime.execute(context(runtime), { name: "contract.extract_obligations", input: { contractId: "C-1", clauses: [{ clause: "4.2", text: "Supplier shall provide the compliance report within 10 days and maintain insurance certificate." }] }, risk: "low", resource: "contract/C-1", estimatedCostEur: 0 });
+    expect(result.ok).toBe(true);
+    const extracted = result.output as ContractObligation[];
+    expect(extracted).toHaveLength(1);
+    expect(extracted[0].confidence).toBeGreaterThanOrEqual(0.8);
+    expect(extracted[0].sourceStart).toBe(0);
+    expect(extracted[0].requiredEvidenceTypes).toContain("report");
+  });
+
   it("assesses deadlines deterministically", async () => {
     const runtime = createContractObligationsRuntime();
     const result = await runtime.execute(context(runtime), { name: "contract.assess_deadline", input: { obligation, now: "2026-09-12T12:00:00Z" }, risk: "low", resource: "obligation/OB-1", estimatedCostEur: 0 });
@@ -21,7 +32,7 @@ describe("Contract Obligations runtime", () => {
     expect((result.output as { daysUntilDue?: number }).daysUntilDue).toBe(8);
   });
 
-  it("requires approval before sending a notice", async () => {
+  it("requires approval before sending a notice and rejects token replay", async () => {
     const runtime = createContractObligationsRuntime();
     const ctx = context(runtime);
     const call = { name: "contract.send_notice", input: { obligationId: "OB-1", recipientId: "owner-1", message: "Deadline reminder" }, risk: "medium" as const, resource: "obligation/OB-1", estimatedCostEur: 0.1 };
@@ -30,10 +41,8 @@ describe("Contract Obligations runtime", () => {
     const requestId = pending.error!.approvalRequestId!;
     const token = runtime.approvalStore().approve(ctx.tenantId, requestId);
     expect(token).toBeTruthy();
-    const executed = await runtime.execute(ctx, call, { requestId, token: token! });
-    expect(executed.ok).toBe(true);
-    const replay = await runtime.execute(ctx, call, { requestId, token: token! });
-    expect(replay.error?.code).toBe("INVALID_APPROVAL");
+    expect((await runtime.execute(ctx, call, { requestId, token: token! })).ok).toBe(true);
+    expect((await runtime.execute(ctx, call, { requestId, token: token! })).error?.code).toBe("INVALID_APPROVAL");
   });
 
   it("blocks low-confidence consequential actions", async () => {
@@ -55,9 +64,7 @@ describe("Contract Obligations runtime", () => {
   it("isolates idempotency between tenants", async () => {
     const runtime = createContractObligationsRuntime();
     const call = { name: "contract.assess_deadline", input: { obligation, now: "2026-09-12T12:00:00Z" }, risk: "low" as const, resource: "obligation/OB-1", estimatedCostEur: 0, idempotencyKey: "deadline-1" };
-    const a = await runtime.execute(context(runtime, "tenant-a"), call);
-    const b = await runtime.execute(context(runtime, "tenant-b"), call);
-    expect(a.ok).toBe(true);
-    expect(b.ok).toBe(true);
+    expect((await runtime.execute(context(runtime, "tenant-a"), call)).ok).toBe(true);
+    expect((await runtime.execute(context(runtime, "tenant-b"), call)).ok).toBe(true);
   });
 });
