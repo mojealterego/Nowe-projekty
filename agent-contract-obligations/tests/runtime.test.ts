@@ -15,7 +15,7 @@ function context(runtime: ReturnType<typeof createContractObligationsRuntime>, t
 describe("Contract Obligations runtime", () => {
   it("extracts actionable obligations with source metadata", async () => {
     const runtime = createContractObligationsRuntime();
-    const result = await runtime.execute(context(runtime), { name: "contract.extract_obligations", input: { contractId: "C-1", clauses: [{ clause: "4.2", text: "Supplier shall provide the compliance report within 10 days and maintain insurance certificate." }] }, risk: "low", resource: "contract/C-1", estimatedCostEur: 0 });
+    const result = await runtime.execute(context(runtime), { name: "read_contract_obligations", input: { contractId: "C-1", clauses: [{ clause: "4.2", text: "Supplier shall provide the compliance report within 10 days and maintain insurance certificate." }] }, risk: "low", resource: "contract/C-1", estimatedCostEur: 0 });
     expect(result.ok).toBe(true);
     const extracted = result.output as ContractObligation[];
     expect(extracted).toHaveLength(1);
@@ -48,7 +48,7 @@ describe("Contract Obligations runtime", () => {
   it("blocks low-confidence consequential actions", async () => {
     const runtime = createContractObligationsRuntime();
     const lowConfidence = { ...obligation, confidence: 0.6 };
-    const result = await runtime.execute(context(runtime), { name: "contract.prepare_action", input: { obligation: lowConfidence, action: "escalate", summary: "Escalate missed obligation" }, risk: "medium", resource: "obligation/OB-1", estimatedCostEur: 0.1 });
+    const result = await runtime.execute(context(runtime), { name: "contract.prepare_action", input: { obligation: lowConfidence, action: "escalate", summary: "Escalate missed obligation" }, risk: "low", resource: "obligation/OB-1", estimatedCostEur: 0.1 });
     expect(result.ok).toBe(false);
     expect(result.error?.code).toBe("LOW_CONFIDENCE");
   });
