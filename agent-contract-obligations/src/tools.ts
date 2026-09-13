@@ -3,7 +3,7 @@ import type { ToolDefinition } from "../../agents/b2b/runtime/registry.js";
 import { assessDeadline, extractObligations, verifyObligation, type ClauseInput, type ContractObligation, type ObligationEvidence } from "./domain.js";
 
 export const extractContractObligations: ToolDefinition<{ contractId: string; clauses: ClauseInput[] }> = {
-  name: "contract.extract_obligations",
+  name: "read_contract_obligations",
   async execute(_context: AgentContext, input) { return { ok: true, output: extractObligations(input.contractId, input.clauses) }; }
 };
 
@@ -27,7 +27,6 @@ export const prepareContractAction: ToolDefinition<PrepareActionInput> = {
 };
 
 export interface SendNoticeInput { obligationId: string; recipientId: string; message: string; }
-/** Post-approval boundary; no notification provider is called in the MVP. */
 export const sendContractNotice: ToolDefinition<SendNoticeInput> = {
   name: "contract.send_notice",
   async execute(_context: AgentContext, input): Promise<ToolResult> {
