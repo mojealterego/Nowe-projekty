@@ -1,6 +1,11 @@
 import type { AgentContext, ToolResult } from "../../agents/b2b/runtime/types.js";
 import type { ToolDefinition } from "../../agents/b2b/runtime/registry.js";
-import { assessDeadline, verifyObligation, type ContractObligation, type ObligationEvidence } from "./domain.js";
+import { assessDeadline, extractObligations, verifyObligation, type ClauseInput, type ContractObligation, type ObligationEvidence } from "./domain.js";
+
+export const extractContractObligations: ToolDefinition<{ contractId: string; clauses: ClauseInput[] }> = {
+  name: "contract.extract_obligations",
+  async execute(_context: AgentContext, input) { return { ok: true, output: extractObligations(input.contractId, input.clauses) }; }
+};
 
 export const assessContractDeadline: ToolDefinition<{ obligation: ContractObligation; now: string }> = {
   name: "contract.assess_deadline",
